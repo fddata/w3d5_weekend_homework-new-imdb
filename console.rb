@@ -6,6 +6,7 @@ require_relative 'db/sql_runner.rb'
 
 Customer.delete_all()
 Film.delete_all()
+Ticket.delete_all()
 
 customer1 = Customer.new({
   "name" => "Tom",
@@ -17,20 +18,40 @@ customer2 = Customer.new({
   "name" => "Jane",
   "funds" => 100
   })
-  customer2.save()
+customer2.save()
 
 
 film1 = Film.new({
   "title" => 'Jaws',
   'price' => 10
   })
-  film1.save()
+film1.save()
 
 film2 = Film.new({
   'title' => 'Star Wars',
   'price' => 15
   })
 film2.save()
+
+ticket1 = Ticket.new({
+  'film_id' => film1.id,
+  'customer_id' => customer1.id
+  })
+ticket1.save()
+
+ticket2 = Ticket.new({
+  'film_id' => film2.id,
+  'customer_id' => customer1.id
+  })
+ticket2.save()
+
+ticket3 = Ticket.new({
+  'film_id' => film2.id,
+  'customer_id' => customer2.id
+  })
+ticket3.save()
+
+
 
 
 
@@ -46,7 +67,12 @@ film2.save()
 # film1.title = "BLAH"
 # film1.price = 60
 # film1.update() #works
-
+# Ticket.delete_all() #works
+# ticket1.delete() #works
+# ticket1.film_id = 1000
+# ticket1.update() #works
+# p customer1.films() #works
+p film2.customers()
 
 binding.pry
 nil
