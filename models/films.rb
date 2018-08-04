@@ -37,6 +37,12 @@ class Film
     return result.map { |customer| Customer.new(customer)  }
   end
 
+  def count_tickets
+    sql = "SELECT COUNT(customer_id) FROM tickets WHERE film_id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    return result[0]['count'].to_i
+  end
 
   def self.delete_all()
     sql = "DELETE FROM films"

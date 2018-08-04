@@ -10,7 +10,7 @@ Ticket.delete_all()
 
 customer1 = Customer.new({
   "name" => "Tom",
-  "funds" => 50
+  "funds" => 100
   })
 customer1.save()
 
@@ -22,7 +22,7 @@ customer2.save()
 
 customer3 = Customer.new({
   "name" => "Simon",
-  "funds" => 1000
+  "funds" => 100
   })
 customer3.save()
 
@@ -40,23 +40,12 @@ film2 = Film.new({
   })
 film2.save()
 
-ticket1 = Ticket.new({
-  'film_id' => film1.id,
-  'customer_id' => customer1.id
-  })
-ticket1.save()
-
-ticket2 = Ticket.new({
-  'film_id' => film2.id,
-  'customer_id' => customer1.id
-  })
-ticket2.save()
-
-ticket3 = Ticket.new({
-  'film_id' => film2.id,
-  'customer_id' => customer2.id
-  })
-ticket3.save()
+customer1.buy_ticket(film1) #works
+customer2.buy_ticket(film1) #works
+customer2.buy_ticket(film2) #works
+customer3.buy_ticket(film1) #works
+customer3.buy_ticket(film2) #works
+customer3.buy_ticket(film2) #works
 
 
 
@@ -80,10 +69,14 @@ ticket3.save()
 # ticket1.update() #works
 # p customer1.films() #works
 # p film2.customers() #works
-# customer1.decrease_funds(film1) #works
-# customer2.decrease_funds(film2) #works
-# customer2.decrease_funds(film1) #works
-customer3.buy_ticket(film1) #works
+
+p "customer 1 has bought #{customer1.count_tickets()} tickets"
+p "customer 2 has bought #{customer2.count_tickets()} tickets"
+p "customer 3 has bought #{customer3.count_tickets()} tickets"
+
+
+p " film 1 has sold #{film1.count_tickets()} tickets"
+p " film 2 has sold #{film2.count_tickets()} tickets"
 
 
 binding.pry
