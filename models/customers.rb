@@ -43,6 +43,13 @@ class Customer
     return result.map { |film| Film.new(film)  }
   end
 
+  def buy_ticket(film)
+    UPDATE customer.funds
+    SET customer.funds = customer.funds - film.price
+    WHERE customer.id = $1 AND film.id = $2
+
+  end
+
 
   def delete
     sql = "DELETE FROM customers WHERE id = $1"
