@@ -43,12 +43,22 @@ class Customer
     return result.map { |film| Film.new(film)  }
   end
 
+  #function first updates customer funds then generates a new ticket
   def buy_ticket(film)
-    UPDATE customer.funds
-    SET customer.funds = customer.funds - film.price
-    WHERE customer.id = $1 AND film.id = $2
+    sql = "UPDATE customers
+    SET funds = funds - $1
+    WHERE id = $2"
+    values =[film.price, @id]
+    SqlRunner.run(sql, values)
 
+    Ticket.new({
+      'film_id' => film.id,
+      'customer_id' => @id
+      }).save()
   end
+
+
+
 
 
   def delete

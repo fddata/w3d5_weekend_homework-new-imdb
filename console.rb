@@ -20,6 +20,13 @@ customer2 = Customer.new({
   })
 customer2.save()
 
+customer3 = Customer.new({
+  "name" => "Simon",
+  "funds" => 1000
+  })
+customer3.save()
+
+
 
 film1 = Film.new({
   "title" => 'Jaws',
@@ -72,7 +79,12 @@ ticket3.save()
 # ticket1.film_id = 1000
 # ticket1.update() #works
 # p customer1.films() #works
-p film2.customers()
+# p film2.customers() #works
+# customer1.decrease_funds(film1) #works
+# customer2.decrease_funds(film2) #works
+# customer2.decrease_funds(film1) #works
+customer3.buy_ticket(film1) #works
+
 
 binding.pry
 nil
